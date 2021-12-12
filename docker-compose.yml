@@ -1,0 +1,73 @@
+version: '3.3'
+services:
+
+  # Website container
+  website-rrweb:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    image: soufianeodf/website-rrweb
+    container_name: website-rrweb
+    restart: always
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+    ports:
+      - '80:80'
+
+  # Spring boot
+  spring-boot-rrweb:
+    build:
+      context: ./spring-bootrrweb-postgres
+      dockerfile: Dockerfile
+    image: soufianeodf/spring-boot-rrweb
+    container_name: spring-boot-rrweb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:55432/clickstream
+    networks:
+      - frontend
+      - backend
+    deploy:
+      replicas: 1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+    restart: always
+    ports:
+      - 55432:5432/tcp
+    volumes:
+      - /var/lib/postgres
+      - ./spring-bootrrweb-postgres/dbscripts/postgres:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    container_name: pgadmin-compose
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "test123!"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+
+networks:
+  frontend:
+  backend:
