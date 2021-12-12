@@ -10,4 +10,4 @@ Record video sessions for website visits
 
 # License
 
-Licensed under the [Aoache License](LICENSE).
+Licensed under the [Apache License](LICENSE).
