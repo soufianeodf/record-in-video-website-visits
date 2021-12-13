@@ -24,7 +24,9 @@ services:
     image: soufianeodf/spring-boot-rrweb
     container_name: spring-boot-rrweb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://137.184.66.239:55432/clickstream
+      SPRING_DATASOURCE_URL: jdbc:postgresql://137.184.66.239:55432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORd: ${DB_PASSWORD}
     networks:
       - frontend
       - backend
@@ -49,9 +51,9 @@ services:
       - /var/lib/postgres
       - ./spring-bootrrweb-postgres/dbscripts/postgres:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: clickstream
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
 
   pgadmin-compose:
     image: dpage/pgadmin4
