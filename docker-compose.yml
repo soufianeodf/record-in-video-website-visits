@@ -24,7 +24,7 @@ services:
     image: soufianeodf/spring-boot-rrweb
     container_name: spring-boot-rrweb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://137.184.66.239:55432/${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${HOSTNAME}:55432/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
       SPRING_DATASOURCE_PASSWORd: ${DB_PASSWORD}
     networks:
@@ -63,8 +63,8 @@ services:
     deploy:
       replicas: 1
     environment:
-      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "test123!"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USERNAME}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
       - "16543:80"
     depends_on:
