@@ -24,7 +24,7 @@ services:
     image: soufianeodf/spring-boot-rrweb
     container_name: spring-boot-rrweb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:55432/clickstream
+      SPRING_DATASOURCE_URL: jdbc:postgresql://137.184.66.239:55432/clickstream
     networks:
       - frontend
       - backend
