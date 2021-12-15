@@ -2,7 +2,7 @@
 A proof of concept about recording and replaying users' interactions on the web.
 
 # Youtube video
-* [rrweb, record and replay users interaction on the web.](#)
+* [rrweb, record and replay users interaction on the web.](https://youtu.be/ncqNWpqQGsE)
 
 # Demo video
 https://user-images.githubusercontent.com/40035682/145743722-a809761e-df2b-48dd-8a63-8df6d8561900.mp4
