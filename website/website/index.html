@@ -704,7 +704,7 @@
         function save() {
             const body = JSON.stringify(events);
             events = [];
-            fetch('http://137.184.66.239:8080/api/rrweb/save', {
+            fetch('http://localhost:8080/api/rrweb/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
